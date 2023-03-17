@@ -8,7 +8,7 @@ To use this chatbot, you will need to do the following:
 
 1. Install the required packages:
 
-`pip install -r requirements.txt`
+`pip3 install -r requirements.txt`
 
 2. Set up an OpenAI API key by following these steps:
 
@@ -22,7 +22,7 @@ c. Store the API key in a `.env` file in the project directory like so:
 
 3. Run the chatbot:
 
-`python3 chatbot.py 
+`python3 chatbot.py`
 
 ## Usage
 
