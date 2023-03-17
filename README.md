@@ -1,4 +1,4 @@
-# Chatbot with OpenAI's GPT-3.5 Turbo Model
+# Voice Chatbot with OpenAI's GPT-3.5 Turbo Model
 
 This is a chatbot that uses OpenAI's GPT-3.5 Turbo Model to generate responses to user input.
 
