@@ -30,14 +30,19 @@ console_handler.setFormatter(formatter)
 
 logger.addHandler(console_handler)
 
+# Provide a chat history
+acording = "Acording to this chat history:"
+history = ""
 
 # Define a function to generate a response from ChatGPT
 def generate_response(prompt: str) -> str:
+    # Join chat history to the input prompt
+    message = f"{acording}\n{history}\n----------\n{prompt}"
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
                 {"role": "system", "content": "You are a chatbot"},
-                {"role": "user", "content": prompt},
+                {"role": "user", "content": message},
             ]
         )
 
@@ -82,3 +87,6 @@ while True:
     # Convert response to speech and speak it
     speak(response)
 
+    # Update the chat history
+    history += f"\nUser: {user_input}"
+    history += f"\nChatbot: {response}"
