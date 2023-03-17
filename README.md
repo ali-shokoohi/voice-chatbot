@@ -15,7 +15,9 @@ pip3 install -r requirements.txt
 2. Set up an OpenAI API key by following these steps:
 
 a. Sign up for an OpenAI account at https://chat.openai.com/auth/login
+
 b. Create an API key at https://platform.openai.com/account/api-keys
+
 c. Store the API key in a `.env` file in the project directory like so:
 
    ```
