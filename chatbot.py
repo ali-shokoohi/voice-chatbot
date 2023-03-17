@@ -81,7 +81,9 @@ def get_voice_input() -> str:
 # Define a function to get text input from the user
 def get_text_input() -> str:
     logger.info("Type your message")
-    return input("=> ")
+    text =  input("=> ")
+    logger.info(f"You type: {text}")
+    return text
 
 # Main loop
 while True:
