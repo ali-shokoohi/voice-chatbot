@@ -33,12 +33,15 @@ logger.addHandler(console_handler)
 # Provide a chat history
 message_history = [{"role": "system", "content": "You are a chatbot"}]
 
+# Set model name
+chat_model = "gpt-3.5-turbo"
+
 # Define a function to generate a response from ChatGPT
 
 
 def generate_response(message_history: list) -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model=chat_model,
         messages=message_history
     )
 
