@@ -31,20 +31,16 @@ console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
 # Provide a chat history
-according = "According to this chat history:"
-history = ""
+message_history = [{"role": "system", "content": "You are a chatbot"}]
 
 # Define a function to generate a response from ChatGPT
-def generate_response(prompt: str) -> str:
-    # Join chat history to the input prompt
-    message = f"{according}\n{history}\n----------\n{prompt}"
+
+
+def generate_response(message_history: list) -> str:
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        messages=[
-                {"role": "system", "content": "You are a chatbot"},
-                {"role": "user", "content": message},
-            ]
-        )
+        messages=message_history
+    )
 
     result = ''
     for choice in response.choices:
@@ -71,7 +67,8 @@ def get_voice_input() -> str:
         logger.info("Sorry, I did not understand.")
         return ""
     except sr.RequestError as e:
-        logger.error(f"Could not request results from Google Speech Recognition service: {e}")
+        logger.error(
+            f"Could not request results from Google Speech Recognition service: {e}")
         return ""
 
 
@@ -81,12 +78,10 @@ while True:
     user_input = get_voice_input()
 
     # Generate response from ChatGPT
-    response = generate_response(user_input)
+    message_history.append({"role": "user", "content": user_input})
+    response = generate_response(message_history)
     logger.info(f"Response from ChatGPT: {response}")
+    message_history.append({"role": "assistant", "content": response})
 
     # Convert response to speech and speak it
     speak(response)
-
-    # Update the chat history
-    history += f"\nUser: {user_input}"
-    history += f"\nChatbot: {response}"
