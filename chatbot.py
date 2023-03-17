@@ -36,6 +36,9 @@ message_history = [{"role": "system", "content": "You are a chatbot"}]
 # Set model name
 chat_model = "gpt-3.5-turbo"
 
+# Set input type
+enable_voice = True
+
 # Define a function to generate a response from ChatGPT
 
 
@@ -75,10 +78,25 @@ def get_voice_input() -> str:
         return ""
 
 
+# Define a function to get text input from the user
+def get_text_input() -> str:
+    logger.info("Type your message")
+    return input("=> ")
+
 # Main loop
 while True:
     # Get user input
-    user_input = get_voice_input()
+    user_input = str()
+    if enable_voice:
+        user_input = get_voice_input()
+        if user_input == "" or user_input.lower() == "disable voice" or user_input.lower() == "voice off":
+            enable_voice = False
+            continue
+    else:
+        user_input = get_text_input()
+        if user_input == "" or user_input.lower() == "enable voice" or user_input.lower() == "voice on":
+            enable_voice = True
+            continue
 
     # Generate response from ChatGPT
     message_history.append({"role": "user", "content": user_input})
