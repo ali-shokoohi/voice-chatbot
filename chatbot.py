@@ -31,13 +31,13 @@ console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
 # Provide a chat history
-acording = "Acording to this chat history:"
+according = "According to this chat history:"
 history = ""
 
 # Define a function to generate a response from ChatGPT
 def generate_response(prompt: str) -> str:
     # Join chat history to the input prompt
-    message = f"{acording}\n{history}\n----------\n{prompt}"
+    message = f"{according}\n{history}\n----------\n{prompt}"
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
