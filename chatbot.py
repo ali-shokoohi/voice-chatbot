@@ -39,6 +39,24 @@ chat_model = "gpt-3.5-turbo"
 # Set input type
 enable_voice = True
 
+if os.getenv("CHATGPT_VOICE") == "off":
+    enable_voice = False
+
+
+# Jailbreak mode
+jailbreak = False
+jailbreak_text = ""
+
+if os.getenv("CHATGPT_JAILBREAK") == "on":
+    jailbreak = True
+
+# Read jailbreak text from the ./jailbreak.txt file
+if jailbreak:
+    with open('./jailbreak.txt', 'r') as file:
+        # Read the contents of the file
+        jailbreak_text = file.read()
+        file.close()
+
 # Define a function to generate a response from ChatGPT
 
 
@@ -84,6 +102,15 @@ def get_text_input() -> str:
     text =  input("=> ")
     logger.info(f"You type: {text}")
     return text
+
+# Start jailbreak
+if jailbreak and jailbreak_text != "":
+    logger.info(f"Jailbreaking...")
+    message_history.append({"role": "user", "content": jailbreak_text})
+    response = generate_response(message_history)
+    message_history.append({"role": "assistant", "content": response})
+    logger.info(f"Jailbreaked!")
+
 
 # Main loop
 while True:
