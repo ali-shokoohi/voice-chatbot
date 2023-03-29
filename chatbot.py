@@ -34,7 +34,9 @@ logger.addHandler(console_handler)
 message_history = [{"role": "system", "content": "You are a chatbot"}]
 
 # Set model name
-chat_model = "gpt-3.5-turbo"
+chat_model = os.getenv("CHATGPT_MODEL") 
+if chat_model == "":
+    chat_model = "gpt-3.5-turbo"
 
 # Set input type
 enable_voice = True
