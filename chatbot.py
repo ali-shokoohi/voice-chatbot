@@ -102,7 +102,7 @@ def get_voice_input() -> str:
 def get_text_input() -> str:
     logger.info("Type your message")
     text =  input("=> ")
-    logger.info(f"You type: {text}")
+    logger.info(f"You typed: {text}")
     return text
 
 # Start jailbreak
