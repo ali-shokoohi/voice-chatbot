@@ -9,6 +9,9 @@ To use this chatbot, you will need to do the following:
 1. Install the required packages:
 
 ```bash
+sudo apt update
+sudo apt install portaudio19-dev
+
 pip3 install -r requirements.txt
 ```
 
